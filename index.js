@@ -1,14 +1,13 @@
-const inquire = require("inquirer")
+const inquirer = require("inquirer")
 const fs = require("fs")
 const path = require("path")
-const team = []
-const generateHtml = require("./SRC/htmlgenerator")
+const buildPage = require("./SRC/htmlgenerator")
 
 inquirer
   .prompt([
     {
       type: 'input',
-      name: 'name',
+      name: 'names',
       message: 'What is your name?',
     },
     {
@@ -38,7 +37,7 @@ inquirer
     },
   ])
   .then((answers) => {
-    const htmlPageContent = generateHTML(answers);
+    const htmlPageContent = buildPage(answers);
 
     fs.writeFile('index.html', htmlPageContent, (err) =>
       err ? console.log(err) : console.log('Successfully created index.html!')
